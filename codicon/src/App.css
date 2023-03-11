@@ -1,65 +1,105 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
-}
+* {
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
 }
 
 
-.bg_gradient {
 
-  
+.section__padding {
+  padding: 4rem 6rem;
+}
+
+.section__margin {
+  margin: 4rem 6rem;
+}
+
+.bg_gradient 
+
+{
+
   /* ff 3.6+ */
-  background:-moz-radial-gradient(ellipse at 50% 50%, rgba(11, 0, 137, 1) 0%, rgba(23, 12, 86, 1) 57%, rgba(43, 43, 43, 1) 100%);
+  background:-moz-linear-gradient(0deg, rgba(11, 0, 137, 1) 0%, rgba(23, 12, 86, 1) 57%, rgba(43, 43, 43, 1) 100%); 
 
   /* safari 5.1+,chrome 10+ */
-  background:-webkit-radial-gradient(ellipse at 50% 50%, rgba(11, 0, 137, 1) 0%, rgba(23, 12, 86, 1) 57%, rgba(43, 43, 43, 1) 100%);
+  background:-webkit-linear-gradient(0deg, rgba(11, 0, 137, 1) 0%, rgba(23, 12, 86, 1) 57%, rgba(43, 43, 43, 1) 100%);
 
   /* opera 11.10+ */
-  background:-o-radial-gradient(ellipse at 50% 50%, rgba(11, 0, 137, 1) 0%, rgba(23, 12, 86, 1) 57%, rgba(43, 43, 43, 1) 100%);
+  background:-o-linear-gradient(0deg, rgba(11, 0, 137, 1) 0%, rgba(23, 12, 86, 1) 57%, rgba(43, 43, 43, 1) 100%);
+
+  /* ie 6-9 */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2B2B2B', endColorstr='#0B0089', GradientType=1 );
 
   /* ie 10+ */
-  background:-ms-radial-gradient(ellipse at 50% 50%, rgba(11, 0, 137, 1) 0%, rgba(23, 12, 86, 1) 57%, rgba(43, 43, 43, 1) 100%);
+  background:-ms-linear-gradient(0deg, rgba(11, 0, 137, 1) 0%, rgba(23, 12, 86, 1) 57%, rgba(43, 43, 43, 1) 100%);
 
-  /* global 92%+ browsers support */
-  background:radial-gradient(ellipse at 50% 50%, rgba(11, 0, 137, 1) 0%, rgba(23, 12, 86, 1) 57%, rgba(43, 43, 43, 1) 100%);
+  /* global 94%+ browsers support */
+  background:linear-gradient(0deg, rgba(11, 0, 137, 1) 0%, rgba(23, 12, 86, 1) 57%, rgba(43, 43, 43, 1) 100%);
+
+}
+
+.body_bg_gradient {
+      /* ff 3.6+ */
+      background:-moz-radial-gradient(circle at 50% 50%, rgba(107, 0, 137, 1) 0%, rgba(23, 12, 86, 1) 57%, rgba(43, 43, 43, 1) 100%);
+
+      /* safari 5.1+,chrome 10+ */
+      background:-webkit-radial-gradient(circle at 50% 50%, rgba(107, 0, 137, 1) 0%, rgba(23, 12, 86, 1) 57%, rgba(43, 43, 43, 1) 100%);
+  
+      /* opera 11.10+ */
+      background:-o-radial-gradient(circle at 50% 50%, rgba(107, 0, 137, 1) 0%, rgba(23, 12, 86, 1) 57%, rgba(43, 43, 43, 1) 100%);
+  
+      /* ie 10+ */
+      background:-ms-radial-gradient(circle at 50% 50%, rgba(107, 0, 137, 1) 0%, rgba(23, 12, 86, 1) 57%, rgba(43, 43, 43, 1) 100%);
+  
+      /* global 92%+ browsers support */
+      background:radial-gradient(circle at 50% 50%, rgba(107, 0, 137, 1) 0%, rgba(23, 12, 86, 1) 57%, rgba(43, 43, 43, 1) 100%);
+}
 
 
+.scale-up-center {
+	-webkit-animation: scale-up-center 0.4s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+	        animation: scale-up-center 0.4s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+}
 
+@-webkit-keyframes scale-up-center {
+  0% {
+    -webkit-transform: scale(0.5);
+            transform: scale(0.5);
+  }
+  100% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+}
+@keyframes scale-up-center {
+  0% {
+    -webkit-transform: scale(0.5);
+            transform: scale(0.5);
+  }
+  100% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+}
+
+/* Responsive design*/
+@media screen and (max-width: 700px) {
+  .section__padding {
+      padding: 4rem;
+  }
+  .section__margin {
+      margin: 4rem 
+  }
+}
+
+
+@media screen and (max-width: 550px) {
+  .section__padding {
+      padding: 4rem 2rem;
+  }
+  .section__margin {
+      margin: 4rem 2rem;
+  }
 }
