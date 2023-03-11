@@ -1,6 +1,6 @@
 const express=require('express');
 //const http = require("http");
-//const routerApi=require('./routes');
+const routerApi=require('./routes');
 //const {logerrors,errorhanddler,boomerrorhanddler} =require('./middlewares/error.handle');
 
 const app=express();
@@ -9,10 +9,10 @@ const port=3000;
 app.use(express.json());
 
 app.get('/',(req,res)=>{
-    res.send('Hola mi server en express')
+    res.send('Hola mi server en expresssssss')
 });
 
-//routerApi(app);
+routerApi(app);
 
 /*
 app.use(logerrors);
