@@ -6,6 +6,13 @@ const Login = ({isShowingLogin, onClose}) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
+    const validateFields = () => {
+        if(email.length === 0 || password.length === 0){
+            return false;
+        }
+        return true;
+    }
+
     const handleLogin = (e) => {
         e.preventDefault();
         console.log(email, password);
@@ -13,6 +20,8 @@ const Login = ({isShowingLogin, onClose}) => {
     }
 
   return (
+    <div>
+
     <div className={`${isShowingLogin ? "active": ""} show`}>
         {
             !isShowingLogin &&(
@@ -28,11 +37,21 @@ const Login = ({isShowingLogin, onClose}) => {
                     </div>
                     <div className="login-form__group">
                         <label name="email">Email</label>
-                        <input type="email" name="email" id="email" placeholder="Email" onChange={(e)=> setEmail(e.target.value)}/>
+                        <input maxLength='35' type="email" name="email" id="email" placeholder="Email" onChange={(e)=> setEmail(e.target.value)}/>
                     </div>
                     <div className="login-form__group">
                         <label name="password">Password</label>
-                        <input type="password" name="password" id="password" placeholder="Password" onChange={(e)=> setPassword(e.target.value)}/>
+                        <input minLength='8' maxLength='25'type="password" name="password" id="password" placeholder="Password" onChange={(e)=> setPassword(e.target.value)}/>
+                    </div>
+                    {
+                        !validateFields() && (
+                            <div className='login-form__error'>
+                                <p>¡Usuario o contraseña incorrectos!</p>
+                            </div>
+                        )
+                    }
+                    <div className='login-form__signup'>
+                        <p>¿No tienes una cuenta? Registrate</p>
                     </div>
                     <div className="login-form__group">
                         <button type="submit">Iniciar Sesión</button>
@@ -42,6 +61,8 @@ const Login = ({isShowingLogin, onClose}) => {
         </div>
             )
         }
+    </div>
+        {!isShowingLogin && <div className='overlay'></div>}
     </div>
   );
 };

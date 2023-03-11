@@ -1,8 +1,9 @@
 .show {
 
     display: block;
-    transition: 800ms ease-in-out;
+    transition: 10ms ease-in-out;
     opacity: 1;
+    z-index: 1;
 }
   
   .show.active {
@@ -41,12 +42,12 @@
     left: 50%;
     transform: translate(-50%, -50%);
     width: 400px;
-    height: 400px;
+    height: 450px;
     border-radius: 10px;
     box-shadow: 0 15px 25px rgba(0, 0, 0, 0.5);
     overflow: hidden;
     background: linear-gradient(90deg, #6B0089 1.56%, #0D0925 71.35%, #150F34 100%);;
-    
+    z-index: 999;
 }
 
 .login-form {
@@ -95,7 +96,7 @@
     margin: .5rem 0 0 0;
     padding: 10px 0;
     font-size: 16px;
-    color: #fff;
+    color: white;
     border: none;
     border-bottom: 1px solid #333;
     outline: none;
@@ -115,7 +116,7 @@
         border-radius: 30px;
         cursor: pointer;
         transition: 0.5s;
-        margin-top: 1.5rem;
+        margin-top: .3rem;
 }
 
 .login-form__group input:focus {
@@ -124,3 +125,45 @@
 }
 
 
+.login-form__error {
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-family);
+    font-size: 15px;
+    color: #ff0000;
+    margin-top: 1rem;
+
+}
+
+.login-form__error p{
+
+    font-family: var(--font-family);
+
+}
+
+.login-form__signup {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-family);
+    font-size: 14px;
+    color: #fff;
+    margin: .5rem 0 1rem 0 ;
+    text-align: center;
+}
+
+.login-form__signup p:last-child{
+    cursor: pointer;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+}

@@ -58,6 +58,13 @@
 }
 
 
+.gradient__text {
+  background: -webkit-linear-gradient(89.97deg, #AE67FA 1.84%, #F49867 102.67%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+
 .scale-up-center {
 	-webkit-animation: scale-up-center 0.4s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
 	        animation: scale-up-center 0.4s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;

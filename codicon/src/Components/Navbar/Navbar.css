@@ -6,6 +6,8 @@
     padding: .5rem 2rem;
 }
 
+
+
 .navbar-links {
 
     flex:1;
@@ -21,11 +23,18 @@
 .navbar-links_logo img {
     width: 109px;
     height: 106px;
+    cursor: pointer;
 }
 
 .navbar-links_container{
     display: flex;
     flex-direction: row;
+}
+
+.navbar-links_container p {
+    margin: 0 2.5rem;
+    cursor: pointer;
+    text-decoration: none;
 }
 
 .navbar-sign {
