@@ -9,37 +9,37 @@ MAX_WIDTH = 50
 Objects = [
     {
         'image': 'sprites/Billetes.png',
-        'score': 5,
+        'score': 50,
         'width': 260,
         'height': 243,
     } ,
     {
         'image': 'sprites/Oso.png',
-        'score': 10,
+        'score': 5,
         'width': 162,
         'height': 180,
     },
     {
         'image': 'sprites/Patito.png',
-        'score': 15,
+        'score': 10,
         'width': 254,
         'height': 251,
     },
     {
         'image': 'sprites/Pelota.png',
-        'score': 20,
+        'score': 15,
         'width': 232,
         'height': 217,
     },
     {
         'image': 'sprites/Regla.png',
-        'score': 25,
+        'score': 20,
         'width': 405,
         'height': 192,
     },
     {
         'image': 'sprites/Tren.png',
-        'score': 30,
+        'score': 25,
         'width': 311,
         'height': 207,
     },

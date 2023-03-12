@@ -11,7 +11,12 @@ class Player(pygame.sprite.Sprite):
     def __init__(self):
         super(Player, self).__init__()
 
-        self.surf = pygame.image.load("sprites/Caja.png").convert_alpha()
+        self.width = WIDTH
+        self.height = HEIGHT
+
+        self.image = 'sprites/Caja.png'
+
+        self.surf = pygame.image.load(self.image).convert_alpha()
         self.surf = pygame.transform.scale(self.surf, (WIDTH,HEIGHT))
         self.update_mask()
 

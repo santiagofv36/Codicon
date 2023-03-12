@@ -17,8 +17,9 @@ class Background(pygame.sprite.Sprite):
         ''''
             Se carga la imagen del fondo y se le aplica la escalacion
         '''
+        image = 'background2.jpg'
 
-        self.surf = pygame.image.load("sprites/Fondo.png")
+        self.surf = pygame.image.load(f"sprites/{image}")
         background_width = SCREEN_WIDTH * 2 
         background_height = (background_width/self.surf.get_width())*self.surf.get_height()
         self.surf = pygame.transform.scale(self.surf, (background_width, background_height))

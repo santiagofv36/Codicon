@@ -118,16 +118,18 @@ class Game:
         '''
         pygame.mixer.music.load('sprites/Sounds/music.mp3')
         pygame.mixer.music.set_volume(0.3)
+        self.music_playing = True
         pygame.mixer.music.play()
 
 
         self.loose = pygame.mixer.Sound('sprites/Sounds/game_over.mp3')
         self.grab = pygame.mixer.Sound('sprites/Sounds/success.mp3')
-        self.loose.set_volume(0.5)
+        self.loose.set_volume(1.2)
         self.grab.set_volume(0.5)
         self.damage = pygame.mixer.Sound('sprites/Sounds/damage.mp3')
         self.damage.set_volume(1)
 
+        self.sound_playing = True
 
 
 
@@ -146,6 +148,25 @@ class Game:
             elif event.type == KEYDOWN:
                 if event.key == K_ESCAPE:
                     self.running = False
+                elif event.key == K_m:
+                    if self.music_playing:
+                        pygame.mixer.music.set_volume(0)
+                        self.music_playing = False
+                    else:
+                        pygame.mixer.music.set_volume(0.3)
+                        self.music_playing = True
+                elif event.key == K_n:
+                    if self.sound_playing:
+                        self.loose.set_volume(0)
+                        self.grab.set_volume(0)
+                        self.damage.set_volume(0)
+                        self.sound_playing = False
+                    else:
+                        self.loose.set_volume(1.2)
+                        self.grab.set_volume(0.5)
+                        self.damage.set_volume(1)
+                        self.sound_playing = True
+
 
         if self.lost or not self.started:
             for event in events:
@@ -189,7 +210,7 @@ class Game:
                     self.object_timer = 1000 - ((globals.game_speed - 1) * 100)
                     if self.object_timer < 50: self.object_timer = 50
                     pygame.time.set_timer(ADD_OBJECT, int(self.object_timer))
-
+            
             self.player.update(self.movement, delta_time)
             self.objects.update(delta_time)
             self.enemies.update(delta_time)
@@ -235,6 +256,7 @@ class Game:
     def render(self):
         self.screen.fill((0,0,0))
 
+
         self.background.render(self.screen)
 
         '''
@@ -247,6 +269,7 @@ class Game:
         elif self.lives == 2:
             self.heart1.render(self.screen)
             self.heart2.render(self.screen)
+
         elif self.lives == 1:
             self.heart1.render(self.screen)
 
@@ -275,7 +298,7 @@ class Game:
 
         display_score = self.score
         text_score = self.font.render(
-            f'Score: {str(display_score)}', True, (255, 255, 255)
+            f'Score: {str(display_score)}', True, (0,0,0)
         )
         scoreTextRect = text_score.get_rect()
         scoreTextRect.bottom = SCREEN_HEIGHT-5
@@ -288,7 +311,7 @@ class Game:
 
         display_highest_score = self.highest_score
         text_highest_score = self.font.render(
-            f'Highest Score: {str(display_highest_score)}', True, (255, 255, 255)
+            f'Highest Score: {str(display_highest_score)}', True, (0,0,0)
         )
         highest_scoreTextRect = text_highest_score.get_rect()
         highest_scoreTextRect.bottom = SCREEN_HEIGHT-5
@@ -331,6 +354,11 @@ class Game:
             instructions_text_rect = instructions_text.get_rect()
             instructions_text_rect.center = (SCREEN_WIDTH // 2, (SCREEN_HEIGHT // 1.5) + 20)
             self.screen.blit(instructions_text, instructions_text_rect)
+            instructions_of_key_binds = self.super_small_font.render('Presiona la tecla "m" silenciar la musica y la tecla "n" para silecionar los sonidos', True, (200,200,200), (0,0,0))
+            instructions_of_key_binds_rect = instructions_of_key_binds.get_rect()
+            instructions_of_key_binds_rect.center = (SCREEN_WIDTH // 2, (SCREEN_HEIGHT // 1.5) + 40)
+            self.screen.blit(instructions_of_key_binds, instructions_of_key_binds_rect)
+
 
 
 
