@@ -10,6 +10,7 @@ from Classes.background import Background
 import Global.globals as globals
 import random
 import pygame.mixer
+from Classes.Hearts import Hearts
 
 import cv2
 import mediapipe as mp
@@ -19,10 +20,12 @@ import math
     Clase que representa el juego
 '''
 
+
 class Game:
     '''
         Inicializador de la clase
     '''
+
     def __init__(self):
         '''
             Se inicializan las variables necesarias para el juego
@@ -83,6 +86,17 @@ class Game:
 
         self.lost = False
         self.score = 0
+        # read the score.txt file and get the high score
+        with open('score.txt', 'r') as f:
+            self.highest_score = int(f.read())
+        '''
+            Implementacion de vidas
+        '''
+        self.lives = 3
+        self.heart1 = Hearts(SCREEN_WIDTH - 50, 50, 40, 40)
+        self.heart2 = Hearts(SCREEN_WIDTH - 100, 50, 40, 40)
+        self.heart3 = Hearts(SCREEN_WIDTH - 150, 50, 40, 40)
+        self.hearts = pygame.sprite.Group(self.heart1, self.heart2, self.heart3)
 
         '''
             Se inicializa la webcam
@@ -111,6 +125,9 @@ class Game:
         self.grab = pygame.mixer.Sound('sprites/Sounds/success.mp3')
         self.loose.set_volume(0.5)
         self.grab.set_volume(0.5)
+        self.damage = pygame.mixer.Sound('sprites/Sounds/damage.mp3')
+        self.damage.set_volume(1)
+
 
 
 
@@ -179,6 +196,7 @@ class Game:
             self.process_collisions()
             self.background.update(delta_time)
 
+
     def process_collisions(self):
         '''
             Las colisiones se chequean con las mascaras de los sprites
@@ -186,9 +204,20 @@ class Game:
         collide = pygame.sprite.spritecollide(self.player, self.enemies, False, pygame.sprite.collide_mask)
         # Chequeo si colisiono con algun enemigo
         if collide:
-            self.loose.play()
-            pygame.mixer.music.stop()
-            self.lost = True
+            self.damage.play()
+            self.lives -= 1
+
+            for enemy in collide:
+                enemy.kill()
+            if self.lives == 0:
+                self.loose.play()
+                pygame.mixer.music.stop()
+                self.lost = True
+                # Se guarda el mayor puntaje en un txt
+                if self.score > self.highest_score:
+                    self.highest_score = self.score
+                    with open('score.txt', 'w') as f:
+                        f.write(str(self.score))
 
         #chequeo si colisiono con algun objeto para sumar puntos
         if grabObject := pygame.sprite.spritecollide(
@@ -207,6 +236,19 @@ class Game:
         self.screen.fill((0,0,0))
 
         self.background.render(self.screen)
+
+        '''
+            Se dibujan las vidas dependiendo de la cantidad de vidas que le queden al jugador
+        '''
+        if self.lives == 3:
+            self.heart1.render(self.screen)
+            self.heart2.render(self.screen)
+            self.heart3.render(self.screen)
+        elif self.lives == 2:
+            self.heart1.render(self.screen)
+            self.heart2.render(self.screen)
+        elif self.lives == 1:
+            self.heart1.render(self.screen)
 
         '''
             Se dibuja la webcam
@@ -241,6 +283,20 @@ class Game:
         self.screen.blit(text_score, scoreTextRect)
 
         '''
+            Se dibuja el puntaje mas alto
+        '''
+
+        display_highest_score = self.highest_score
+        text_highest_score = self.font.render(
+            f'Highest Score: {str(display_highest_score)}', True, (255, 255, 255)
+        )
+        highest_scoreTextRect = text_highest_score.get_rect()
+        highest_scoreTextRect.bottom = SCREEN_HEIGHT-5
+        highest_scoreTextRect.right = SCREEN_WIDTH-5
+        self.screen.blit(text_highest_score, highest_scoreTextRect)
+
+
+        '''
             Se dibuja el mensaje de game over
         '''
 
@@ -255,9 +311,13 @@ class Game:
             Se dibuja el mensaje de inicio
         '''
 
+        # display the hearts
+
         if not self.started:
             self._Start_Restart_Game('Presiona Enter para comenzar')
         pygame.display.flip()
+
+
 
     def _Start_Restart_Game(self, arg0):
         # titlo principal
